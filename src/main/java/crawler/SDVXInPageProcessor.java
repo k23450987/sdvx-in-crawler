@@ -22,14 +22,18 @@ public class SDVXInPageProcessor implements PageProcessor {
 		page.addTargetRequests(list);
 
 		Document document = page.getHtml().getDocument();
-		Elements elements = document.select("title");
+		Elements elements = document.select(".s > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(3) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)");
 		Elements elements2 = document.select(".s > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(3) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1)");
+		Elements elements3 = document.select(".s > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)");
 
 		if (elements.size() != 0) {
 			page.putField("Song", elements.get(0).text());
 		}
 		if (elements2.size() != 0) {
 			page.putField("Author", elements2.get(0).text().substring(2).trim());
+		}
+		if (elements3.size() != 0) {
+			page.putField("Level", elements3.text());
 		}
 	}
 
