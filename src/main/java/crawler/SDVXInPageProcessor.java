@@ -15,8 +15,11 @@ public class SDVXInPageProcessor implements PageProcessor {
 
 	@Override
 	public void process(Page page) {
+		List<String> list = page.getHtml().links().regex("http://sdvx\\.in/sort/sort_[0-9][0-9].*")
+				.all();
 		List<String> links = page.getHtml().links().regex("http://sdvx\\.in/[0-9][0-9]/.*").all();
-		page.addTargetRequests(links);
+		list.addAll(links);
+		page.addTargetRequests(list);
 
 		Document document = page.getHtml().getDocument();
 		Elements elements = document.select("title");
@@ -38,7 +41,7 @@ public class SDVXInPageProcessor implements PageProcessor {
 
 	public static void main(String[] args) {
 		Spider.create(new SDVXInPageProcessor()).setDownloader(new HtmlUnitDownloader())
-				.addUrl("http://sdvx.in/sort/sort_18.htm")
-				.addPipeline(new ConsolePipeline()).thread(5).run();
+				.addUrl("http://sdvx.in/")
+				.addPipeline(new ConsolePipeline()).thread(8).run();
 	}
 }
