@@ -1,4 +1,4 @@
-# sdvx_in_crawler
+# sdvx-in-crawler
 A web page crawler
 
 Features
